@@ -3,7 +3,7 @@ import java.sql.*;
 
 public class JDBC {
 
-        public void  sqlCom(String host,String username, String password) {
+        public void sqlCom(String host,String username, String password) {
 
             //loadDriver(); //Obsolete - only needed in rare cases.
             //try with resources (Java 7) - automatically calls connection.close() on end of try-catch block
@@ -11,17 +11,14 @@ public class JDBC {
 
         try (Connection connection = DriverManager.getConnection("jdbc:mysql://"+host+"/"+username+"?"
                 + "user="+username+"&"+"password="+password)){
+            Statement statement = connection.createStatement();
+            System.out.println("Got resultset from database:");
 
-            /* try (Connection connection = DriverManager.getConnection("jdbc:mysql://ec2-52-30-211-3.eu-west-1.compute.amazonaws.com/s153679?"
-                    + "user=s153679&password=2IYMod6yoCtICi61cdPFR")){
-
-                    */
-                Statement statement = connection.createStatement();
-                ResultSet resultSet = statement.executeQuery("SELECT * FROM usersDB");
-                System.out.println("Got resultset from database:");
-                while (resultSet.next()){
-                    System.out.println(resultSet.getString(1) + ": " + resultSet.getString(2));
-                }
+            ResultSet rs = statement.executeQuery("SELECT * FROM usersDB WHERE userID=1996");
+            rs.next();
+            for(int i = 1; i<=6;i++) {
+                System.out.printf(rs.getString(i)+" | ");
+            }
             } catch (SQLException e) {
                 //Remember to handle Exceptions gracefully! Connection might be Lost....
                 e.printStackTrace();
