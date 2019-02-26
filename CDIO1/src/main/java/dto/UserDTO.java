@@ -9,14 +9,21 @@ public class UserDTO implements Serializable{
 	private static final long serialVersionUID = 4545864587995944260L;
 	private int	userId;                     
 	private String userName;                
-	private String ini;                 
+	private String ini;
+	private int cpr;
+	private String pass;
 	private List<String> roles;
 	//TODO Add relevant fields
-	
-	public UserDTO() {
-		this.roles = new ArrayList<>();
+
+	public UserDTO(int userId, String userName, String ini, int cpr, String pass, List<String> roles) {
+		this.userId = userId;
+		this.userName = userName;
+		this.ini = ini;
+		this.cpr = cpr;
+		this.pass = pass;
+		this.roles = roles;
 	}
-	
+
 	public int getUserId() {
 		return userId;
 	}
@@ -35,6 +42,10 @@ public class UserDTO implements Serializable{
 	public void setIni(String ini) {
 		this.ini = ini;
 	}
+	public int getCpr() { return cpr; }
+	public void setCpr(int cpr) { this.cpr = cpr; }
+	public String getPass() { return pass; }
+	public void setPass(String pass) { this.pass = pass; }
 
 	public List<String> getRoles() {
 		return roles;
@@ -57,9 +68,13 @@ public class UserDTO implements Serializable{
 
 	@Override
 	public String toString() {
-		return "UserDTO [userId=" + userId + ", userName=" + userName + ", ini=" + ini + ", roles=" + roles + "]";
+		return "UserDTO{" +
+				"userId=" + userId +
+				", userName='" + userName + '\'' +
+				", ini='" + ini + '\'' +
+				", cpr=" + cpr +
+				", pass='" + pass + '\'' +
+				", roles=" + roles +
+				'}';
 	}
-	
-	
-	
 }
