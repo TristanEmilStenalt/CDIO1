@@ -13,7 +13,6 @@ public class UserDTO implements Serializable{
 	private int cpr;
 	private String pass;
 	private List<String> roles;
-	//TODO Add relevant fields
 
 	public UserDTO(int userId, String userName, String ini, int cpr, String pass, List<String> roles) {
 		this.userId = userId;
