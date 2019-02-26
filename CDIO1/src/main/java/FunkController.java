@@ -1,6 +1,10 @@
+import dal.IUserDAO;
+import dal.UserDAOimpl;
+
 public class FunkController {
 
     // fields
+    IUserDAO dao = new UserDAOimpl();
 
     // Constructor
 
@@ -15,9 +19,8 @@ public class FunkController {
 
     }
 
-    public void updateUser()
-    {
-
+    public void updateUser(int id) throws IUserDAO.DALException {
+        dao.getUser(id);
     }
 
     public void deleteUser()

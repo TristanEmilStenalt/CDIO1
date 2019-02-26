@@ -5,6 +5,7 @@ import dto.UserDTO;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 public class UserDAOimpl implements IUserDAO {
@@ -21,12 +22,18 @@ public class UserDAOimpl implements IUserDAO {
 
     @Override
     public UserDTO getUser(int userId) throws DALException {
+
+
+
         return null;
     }
 
     @Override
     public List<UserDTO> getUserList() throws DALException {
-        return null;
+        List<UserDTO> users = new ArrayList<>();
+        //Pseudo: for hver bruger i databasen lav put bruger i databasen
+
+        return users;
     }
 
     @Override
