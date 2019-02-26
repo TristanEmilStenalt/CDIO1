@@ -3,19 +3,21 @@ import java.sql.*;
 
 public class JDBC {
 
-        public static void main(String[] args) {
+        public void  sqlCom(String host,String username, String password) {
 
             //loadDriver(); //Obsolete - only needed in rare cases.
             //try with resources (Java 7) - automatically calls connection.close() on end of try-catch block
             //Ensures that connections aren't left hanging
-            /*
-        try (Connection connection = DriverManager.getConnection("jdbc:mysql://"+"host+"/"+username+"?"
+
+        try (Connection connection = DriverManager.getConnection("jdbc:mysql://"+host+"/"+username+"?"
                 + "user="+username+"&"+"password="+password)){
-         */
-            try (Connection connection = DriverManager.getConnection("jdbc:mysql://ec2-52-30-211-3.eu-west-1.compute.amazonaws.com/s153679?"
+
+            /* try (Connection connection = DriverManager.getConnection("jdbc:mysql://ec2-52-30-211-3.eu-west-1.compute.amazonaws.com/s153679?"
                     + "user=s153679&password=2IYMod6yoCtICi61cdPFR")){
+
+                    */
                 Statement statement = connection.createStatement();
-                ResultSet resultSet = statement.executeQuery("SELECT * FROM userDB");
+                ResultSet resultSet = statement.executeQuery("SELECT * FROM usersDB");
                 System.out.println("Got resultset from database:");
                 while (resultSet.next()){
                     System.out.println(resultSet.getString(1) + ": " + resultSet.getString(2));
