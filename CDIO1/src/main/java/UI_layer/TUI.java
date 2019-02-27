@@ -9,7 +9,7 @@ Hovedmenu:
  */
 
 
-import Data_layer.IUserDAO;
+import Data_layer.dal.IUserDAO;
 import function_layer.FunkController;
 
 import java.util.Scanner;

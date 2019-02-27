@@ -1,4 +1,4 @@
-package Data_layer;
+package Data_layer.dto;
 
 import java.io.Serializable;
 import java.util.ArrayList;

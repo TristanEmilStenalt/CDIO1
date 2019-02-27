@@ -1,4 +1,6 @@
-package Data_layer;
+package Data_layer.dal;
+
+import Data_layer.dto.UserDTO;
 
 import java.sql.*;
 import java.util.ArrayList;

@@ -1,4 +1,4 @@
-package Data_layer;
+package Data_layer.dal;
 import java.sql.*;
 
 public class JDBCT {

@@ -1,5 +1,5 @@
 import UI_layer.TUI;
-import Data_layer.IUserDAO;
+import Data_layer.dal.IUserDAO;
 
 public class Main {
 

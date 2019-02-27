@@ -1,7 +1,7 @@
 package function_layer;
 
-import Data_layer.IUserDAO;
-import Data_layer.UserDAOimpl;
+import Data_layer.dal.IUserDAO;
+import Data_layer.dal.UserDAOimpl;
 
 public class FunkController {
 
