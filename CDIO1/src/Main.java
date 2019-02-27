@@ -10,9 +10,25 @@ public class Main {
         String host = "ec2-52-30-211-3.eu-west-1.compute.amazonaws.com";
         String username;
         String password;
-        System.out.println("Would you like to use Tristans or Marks database? [1/2]");
 
-        int startChoice = input.nextInt();
+        int startChoice;
+
+        /*chooses database
+        *
+        *
+        * */
+
+        while(true) {
+            System.out.println("Would you like to use Tristans, Marks or Keiths database? [1/3]");
+             startChoice = input.nextInt();
+            if(startChoice>3 || startChoice<1){
+                System.out.println("Would you like to use Tristans, Marks or Keiths database? [1/3]");
+                startChoice = input.nextInt();
+            } else{
+                 break;
+            }
+        }
+
         TUI tui = new TUI();
 
 
@@ -27,6 +43,14 @@ public class Main {
             case 2:
                 username = "s153679";
                 password = "2IYMod6yoCtICi61cdPFR";
+                startSQL.setValues(host,username,password);
+                tui.mainMenu();
+
+                break;
+
+            case 3:
+                username = "s173945";
+                password = "m3q6pH6Tb4zGVfk4YImjr";
                 startSQL.setValues(host,username,password);
                 tui.mainMenu();
 
