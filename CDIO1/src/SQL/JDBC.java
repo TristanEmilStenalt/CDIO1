@@ -20,7 +20,9 @@ public class JDBC {
             try (Connection connection = DriverManager.getConnection("jdbc:mysql://"+host+"/"+username+"?"
                     + "user="+username+"&"+"password="+password)){
                 Statement statement = connection.createStatement();
-                statement.executeUpdate("INSERT INTO usersDB VALUES("+userID1+","+userName1+","+ini1+","+cpr1+","+"123"+","+role1+")");
+                // Create sql statement for inserting new user into the database.
+                String sql = "INSERT INTO usersDB VALUES("+userID1+",'"+userName1+"','"+ini1+"',"+cpr1+",'"+password1+"','"+role1+"')";
+                statement.executeUpdate(sql);
                 showAllUsers();
                 return;
             } catch (SQLException e) {
