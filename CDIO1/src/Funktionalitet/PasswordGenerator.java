@@ -6,7 +6,7 @@ public class PasswordGenerator {
 
 
     // this method should take the given user as parameter, create a password, and prompt the setPassword under Data
-    public static char[] generatePassword(){
+    public static String generatePassword(){
 
 
         Random rand = new Random();
@@ -17,19 +17,20 @@ public class PasswordGenerator {
         final char[] symbols = {'!','?','$'};
 
         int length = rand.nextInt(15)+1; // This will create between 2 and 5 of each character (min 6 and max 15)
-        char[] password = new char[length];
+        char[] cpassword = new char[length];
 
         for(int i = 0; i<length-2;i++){
             int chooseType = rand.nextInt(2)+1;
             switch (chooseType){
-                case 1: password[i] = upper[rand.nextInt(25)];
+                case 1: cpassword[i] = upper[rand.nextInt(25)];
                     break;
-                case 2: password[i] = lower[rand.nextInt(25)];
+                case 2: cpassword[i] = lower[rand.nextInt(25)];
                     break;
             }
         }
-        password[length-2] = symbols[rand.nextInt(2)];
-        password[length-1] = digits[rand.nextInt(9)];
+        cpassword[length-2] = symbols[rand.nextInt(2)];
+        cpassword[length-1] = digits[rand.nextInt(9)];
+        String password = String.copyValueOf(cpassword);
         return password;
     }
 

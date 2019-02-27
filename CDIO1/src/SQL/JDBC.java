@@ -13,14 +13,14 @@ public class JDBC {
         return;
         }
 
-        public void createUser(int userID1,String userName1,String ini1,int cpr1,char[] password1,String role1) {
+        public void createUser(int userID1,String userName1,String ini1,int cpr1,String password1,String role1) {
             //loadDriver(); //Obsolete - only needed in rare cases.
             //try with resources (Java 7) - automatically calls connection.close() on end of try-catch block
             //Ensures that connections aren't left hanging
             try (Connection connection = DriverManager.getConnection("jdbc:mysql://"+host+"/"+username+"?"
                     + "user="+username+"&"+"password="+password)){
                 Statement statement = connection.createStatement();
-                statement.executeUpdate("INSERT INTO usersDB VALUES(userID1,userName1,ini1,cpr1,password1,role1);");
+                statement.executeUpdate("INSERT INTO usersDB VALUES("+userID1+","+userName1+","+ini1+","+cpr1+","+"123"+","+role1+")");
                 showAllUsers();
                 return;
             } catch (SQLException e) {

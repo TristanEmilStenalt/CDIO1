@@ -40,8 +40,9 @@ public class TUI{
         System.out.println("Enter your role (Admin/User): ");
         String roles = input.next();
         System.out.println("...Generating password...");
-
-        char[] password = PasswordGenerator.generatePassword();
+        // Creating new password every time the method is called
+        new PasswordGenerator();
+        String password = PasswordGenerator.generatePassword();
 
         System.out.println("...Your password is: "+password);
         try {
