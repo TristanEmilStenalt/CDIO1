@@ -1,4 +1,4 @@
-/*
+package UI_layer;/*
 Brugergrænseflade implementering/use-cases.
 Hovedmenu:
 1. Opret ny bruger
@@ -9,7 +9,8 @@ Hovedmenu:
  */
 
 
-import dal.IUserDAO;
+import Data_layer.IUserDAO;
+import function_layer.FunkController;
 
 import java.util.Scanner;
 

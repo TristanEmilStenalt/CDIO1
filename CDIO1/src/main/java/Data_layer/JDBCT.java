@@ -1,7 +1,7 @@
-package SQL;
+package Data_layer;
 import java.sql.*;
 
-public class JDBC {
+public class JDBCT {
 
         public void sqlCom(String host,String username, String password) {
 

@@ -3,10 +3,10 @@
 //
 //import java.util.List;
 //
-//import dal.IUserDAO;
-//import dal.IUserDAO.DALException;
+//import Data_layer.IUserDAO;
+//import Data_layer.IUserDAO.DALException;
 //import dal.UserDAODiscImpl;
-//import dto.UserDTO;
+//import Data_layer.UserDTO;
 //
 //public class DBTester {
 //	//TODO refactor as JUnit test???

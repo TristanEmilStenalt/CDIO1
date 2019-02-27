@@ -1,7 +1,7 @@
-package dal;
+package Data_layer;
 import java.util.List;
 
-import dto.UserDTO;
+import Data_layer.UserDTO;
 
 public interface IUserDAO {
 
