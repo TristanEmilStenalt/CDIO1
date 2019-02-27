@@ -21,6 +21,8 @@ public class TUI {
     FunkController fCon = new FunkController();
 
 
+    // Methods
+
     public void showMenu() throws IUserDAO.DALException {
         boolean menuActive = true;
         do {
@@ -53,14 +55,32 @@ public class TUI {
         scan.close();
     }
 
-    public void createUser()
-    {
 
+    // Use Case methods
+
+    public void createUser() throws IUserDAO.DALException {
+        System.out.println("--- Enter details below. User ID and Password will be assigned automatically. ---");
+        System.out.println("Enter username: ");
+        String userName = scan.next();
+        System.out.println("Enter initials (2-4 characters): ");
+        String initials = scan.next();
+        System.out.println("Enter cpr: ");
+        int cpr = scan.nextInt();
+        System.out.println("Enter roles: ");
+        String roles = scan.next();
+
+        pressToContinue();
+
+        fCon.createUser(userName, initials, cpr, roles); // Calls FunkController and passes along params
+
+        System.out.println("[User Created Sucessfully]");
+        pressToContinue();
     }
 
     public void showUsers()
     {
 
+        pressToContinue();
     }
 
     public void updateUser() throws IUserDAO.DALException {
@@ -68,9 +88,20 @@ public class TUI {
         fCon.updateUser(scan.nextInt());
     }
 
-    public void deleteUser()
+    public void deleteUser() throws IUserDAO.DALException
     {
 
+
+        pressToContinue();
+    }
+
+
+    // Helping methods
+
+    public void pressToContinue()
+    {
+        System.out.println("Press ENTER to continue...");
+        scan.next();
     }
 
 
