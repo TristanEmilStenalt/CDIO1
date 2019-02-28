@@ -82,6 +82,30 @@ public class UserDAOimpl implements IUserDAO {
 
 
     @Override
+    public int idCount()throws DALException{
+        int count=0;
+        try (Connection c = createConnection()){
+            Statement statement = c.createStatement();
+            ResultSet result = statement.executeQuery("SELECT count FROM userAmount");
+            while (result.next()){
+                // This while loop gets the userid from every user in the database
+                // It then sends the user id to the getUser, so that we store it in the UserDTO
+                count = (result.getInt(1));
+            }
+            count++;
+            statement.executeUpdate("UPDATE userAmount SET count="+count);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return count;
+        }
+
+
+
+
+
+
+    @Override
     public void updateUser(UserDTO user) throws DALException {
         try (Connection c = createConnection()){
             Statement statement = c.createStatement();

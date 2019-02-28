@@ -22,6 +22,7 @@ public class FunkController {
         UserDTO user = new UserDTO(); // Laver ny User, men dens attributter er tomme indtil videre.
 
         //user.setUserId(gen.genId()); // skal tildeles et entydigt/unikt UserID.
+        user.setUserId(idao.idCount());
         user.setUserName(userName);
         user.setIni(initials);
         user.setCpr(cpr);
