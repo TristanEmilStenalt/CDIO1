@@ -31,7 +31,7 @@ public class UserDAOimpl implements IUserDAO {
             //hasNext() behøvet
             resultSet.next();
             UserDTO user = new UserDTO();
-
+            user.setUserId(resultSet.getInt(1));
             user.setUserName(resultSet.getString(2));
             user.setIni(resultSet.getString(3));
             user.setCpr(resultSet.getInt(4));
@@ -83,16 +83,12 @@ public class UserDAOimpl implements IUserDAO {
 
     @Override
     public void updateUser(UserDTO user) throws DALException {
-//loadDriver(); //Obsolete - only needed in rare cases.
-        //try with resources (Java 7) - automatically calls connection.close() on end of try-catch block
-        //Ensures that connections aren't left hanging
         try (Connection c = createConnection()){
-
-
+            Statement statement = c.createStatement();
+            statement.executeUpdate("UPDATE usersDB "+"SET userName='"+user.getUserName()+"' ,"+"ini='"+user.getIni()+"',"+"roles='"+user.getRoles()+"' WHERE userId="+user.getUserId());
 
             return;
         } catch (SQLException e) {
-            //Remember to handle Exceptions gracefully! Connection might be Lost....
             e.printStackTrace();
         }
     }

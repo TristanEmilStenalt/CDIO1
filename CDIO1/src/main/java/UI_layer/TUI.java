@@ -92,14 +92,22 @@ public class TUI {
 
     public void updateUser() throws IUserDAO.DALException {
         System.out.println("Enter ID of user to update: ");
-        fCon.updateUser(scan.nextInt());
+        int userID = scan.nextInt();
+
+        System.out.println("Enter new username: ");
+        String userName = scan.next();
+        System.out.println("Enter new initials: ");
+        String ini = scan.next();
+        System.out.println("Enter new role: ");
+        String roles = scan.next();
+        fCon.updateUser(userID,userName,ini,roles);
     }
 
     public void deleteUser() throws IUserDAO.DALException
     {
-
-
-
+        System.out.println("Select userID of the user you wish to delete: ");
+        int deleteUser = scan.nextInt();
+        fCon.deleteUser(deleteUser);
     }
 
 

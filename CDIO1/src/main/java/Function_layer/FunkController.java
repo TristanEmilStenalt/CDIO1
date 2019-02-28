@@ -36,15 +36,19 @@ public class FunkController {
         return idao.getUserList();
     }
 
-    public void updateUser(int id) throws IUserDAO.DALException
+    public void updateUser(int id,String userName,String ini,String roles) throws IUserDAO.DALException
     {
+        UserDTO user= idao.getUser(id);
+        user.setUserName(userName);
+        user.setIni(ini);
+        user.setRoles(roles);
+        idao.updateUser(user);
 
-        idao.getUser(id);
     }
 
-    public void deleteUser() throws IUserDAO.DALException
+    public void deleteUser(int userID) throws IUserDAO.DALException
     {
-
+        idao.deleteUser(userID);
     }
 
 }

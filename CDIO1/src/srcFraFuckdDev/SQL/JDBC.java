@@ -12,7 +12,9 @@ public class JDBC {
         this.password = password;
         return;
         }
-
+    String host = "ec2-52-30-211-3.eu-west-1.compute.amazonaws.com";
+    String username = "s173839";
+    String password = "uOkOJknRbHNXZMTPuBV9q";
         public void updateDB(String sql) {
             //loadDriver(); //Obsolete - only needed in rare cases.
             //try with resources (Java 7) - automatically calls connection.close() on end of try-catch block
