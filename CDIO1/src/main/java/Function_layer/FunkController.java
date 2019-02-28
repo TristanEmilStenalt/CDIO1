@@ -4,10 +4,14 @@ import Data_layer.dal.IUserDAO;
 import Data_layer.dal.UserDAOimpl;
 import Data_layer.dto.UserDTO;
 
+import java.util.List;
+
 public class FunkController {
 
     // fields
     IUserDAO idao = new UserDAOimpl();
+    // passGenerator
+    PasswordGenerator gen = new PasswordGenerator();
     //ourGenerator gen = new ourGenerator(); // ment til at indeholde funktionalitet der generere unikke ID og Pass.
 
     // Constructor
@@ -21,21 +25,20 @@ public class FunkController {
         user.setUserName(userName);
         user.setIni(initials);
         user.setCpr(cpr);
-        //user.setPass(gen.genPassword()); // skal tildeles et tilfældigt genereret password, som overholder DTU's regler for kodeord.
+        user.setPass(gen.generatePassword());// skal tildeles et tilfældigt genereret password, som overholder DTU's regler for kodeord.
         user.setRoles(roles);
         idao.createUser(user); // Sender UserDTO objektet videre ved kald af metode i dao'en, som så gemmer brugeren i databasen.
 
-        String sql = "INSERT INTO usersDB VALUES("+user.getUserId()+",'"+user.getUserName()+"','"+user.getIni()+"',"+user.getCpr()+",'"+user.getPass()+"','"+user.getRoles()+"')";
-
     }
 
-    public void showUsers() throws IUserDAO.DALException
+    public List<UserDTO> getUsers() throws IUserDAO.DALException
     {
-
+        return idao.getUserList();
     }
 
     public void updateUser(int id) throws IUserDAO.DALException
     {
+
         idao.getUser(id);
     }
 

@@ -10,8 +10,10 @@ Hovedmenu:
 
 
 import Data_layer.dal.IUserDAO;
+import Data_layer.dto.UserDTO;
 import Function_layer.FunkController;
 
+import java.util.List;
 import java.util.Scanner;
 
 public class TUI {
@@ -25,7 +27,10 @@ public class TUI {
 
     public void showMenu() throws IUserDAO.DALException {
         boolean menuActive = true;
+
         do {
+            System.out.print("Press ENTER to continue...");
+            scan.next();
             System.out.println("--- Main Menu ---\n(1) Create User\n(2) Show Users\n(3) Update User\n(4) Delete User\n(5) Exit\n--- Main Menu ---");
             int menu = scan.nextInt();
 
@@ -74,12 +79,14 @@ public class TUI {
         fCon.createUser(userName, initials, cpr, roles); // Calls FunkController and passes along params
 
         System.out.println("[User Created Sucessfully]");
-        pressToContinue();
     }
 
-    public void showUsers()
+    public void showUsers()throws IUserDAO.DALException
     {
-
+        List<UserDTO> userList = fCon.getUsers();
+        for (UserDTO user : userList) {
+            System.out.println(user);
+        }
         pressToContinue();
     }
 
@@ -92,7 +99,7 @@ public class TUI {
     {
 
 
-        pressToContinue();
+
     }
 
 
@@ -100,8 +107,7 @@ public class TUI {
 
     public void pressToContinue()
     {
-        System.out.println("Press ENTER to continue...");
-        scan.next();
+
     }
 
 

@@ -26,59 +26,70 @@ public class UserDAOimpl implements IUserDAO {
 
         try (Connection c = createConnection())
         {
-
             Statement statement = c.createStatement();
-
             ResultSet resultSet = statement.executeQuery("SELECT * FROM usersDB WHERE userId = " + userId);
             //hasNext() behøvet
             resultSet.next();
+            UserDTO user = new UserDTO();
 
-
-
-            String userName = resultSet.getString(2);
-            String ini = resultSet.getString(3);
-            int cpr = resultSet.getInt(4);
-            String pass = resultSet.getString(5);
-            //List<String> roles = resultSet.getString(6);
-
-            //UserDTO user = new UserDTO(userId,userName,ini,cpr,pass,roles);
-
+            user.setUserName(resultSet.getString(2));
+            user.setIni(resultSet.getString(3));
+            user.setCpr(resultSet.getInt(4));
+            user.setPass(resultSet.getString(5));
+            user.setRoles(resultSet.getString(6));
             c.close();
 
             //return user;
-
+            return user;
         } catch (SQLException e) {
             throw new DALException(e.getMessage());
         }
-
-
-        return null;
     }
 
     @Override
     public List<UserDTO> getUserList() throws DALException {
-        List<UserDTO> users = new ArrayList<>();
         //Pseudo: for hver bruger i databasen lav put bruger i databasen
+        List<UserDTO> userList = new ArrayList<UserDTO>();
+        try (Connection c = createConnection())
+        {
+            Statement statement = c.createStatement();
+            ResultSet resultSet = statement.executeQuery("SELECT * FROM usersDB");
+            System.out.println("Got resultset from database:");
 
-        return users;
+            while (resultSet.next()){
+                // This while loop gets the userid from every user in the database
+                // It then sends the user id to the getUser, so that we store it in the UserDTO
+                userList.add(getUser(resultSet.getInt(1)));
+            }
+
+        } catch (SQLException e) {
+            throw new DALException(e.getMessage());
+        }
+        return userList;
     }
 
     @Override
     public void createUser(UserDTO user) throws DALException {
+        try (Connection c = createConnection())
+        {
+            Statement statement = c.createStatement();
+            // Create sql statement for inserting new user into the database.
+            statement.executeUpdate("INSERT INTO usersDB VALUES("+user.getUserId()+",'"+user.getUserName()+"','"+user.getIni()+"',"+user.getCpr()+",'"+user.getPass()+"','"+user.getRoles()+"')");}
+        catch (SQLException e){
+            e.printStackTrace();
+            }
+        }
 
-    }
 
     @Override
     public void updateUser(UserDTO user) throws DALException {
 //loadDriver(); //Obsolete - only needed in rare cases.
         //try with resources (Java 7) - automatically calls connection.close() on end of try-catch block
         //Ensures that connections aren't left hanging
-        try (Connection connection = DriverManager.getConnection("jdbc:mysql://"+host+"/"+username+"?"
-                + "user="+username+"&"+"password="+password)){
-            Statement statement = connection.createStatement();
-            // Create sql statement for inserting new user into the database.
-            statement.executeUpdate(sql);
-            showAllUsers();
+        try (Connection c = createConnection()){
+
+
+
             return;
         } catch (SQLException e) {
             //Remember to handle Exceptions gracefully! Connection might be Lost....
@@ -88,6 +99,16 @@ public class UserDAOimpl implements IUserDAO {
 
     @Override
     public void deleteUser(int userId) throws DALException {
+        try (Connection c = createConnection()){
 
+            Statement statement = c.createStatement();
+            statement.executeUpdate("DELETE FROM usersDB WHERE userID="+userId);
+            System.out.println("User has been deleted");
+
+            return;
+        } catch (SQLException e) {
+            //Remember to handle Exceptions gracefully! Connection might be Lost....
+            e.printStackTrace();
+        }
     }
 }
