@@ -7,11 +7,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class UserDAOimpl implements IUserDAO {
+    String host = "ec2-52-30-211-3.eu-west-1.compute.amazonaws.com";
+    String username = "s173839";
+    String password = "uOkOJknRbHNXZMTPuBV9q";
 
     private Connection createConnection() throws DALException {
         try {
-            return DriverManager.getConnection("jdbc:mysql://ec2-52-30-211-3.eu-west-1.compute.amazonaws.com/s173839?"
-                    + "user=s173839&password=uOkOJknRbHNXZMTPuBV9q");
+            return DriverManager.getConnection("jdbc:mysql://"+host+"/"+username+"?"
+                    + "user="+username+"&"+"password="+password);
         } catch (SQLException e) {
             throw new DALException(e.getMessage());
         }
@@ -67,7 +70,20 @@ public class UserDAOimpl implements IUserDAO {
 
     @Override
     public void updateUser(UserDTO user) throws DALException {
-
+//loadDriver(); //Obsolete - only needed in rare cases.
+        //try with resources (Java 7) - automatically calls connection.close() on end of try-catch block
+        //Ensures that connections aren't left hanging
+        try (Connection connection = DriverManager.getConnection("jdbc:mysql://"+host+"/"+username+"?"
+                + "user="+username+"&"+"password="+password)){
+            Statement statement = connection.createStatement();
+            // Create sql statement for inserting new user into the database.
+            statement.executeUpdate(sql);
+            showAllUsers();
+            return;
+        } catch (SQLException e) {
+            //Remember to handle Exceptions gracefully! Connection might be Lost....
+            e.printStackTrace();
+        }
     }
 
     @Override

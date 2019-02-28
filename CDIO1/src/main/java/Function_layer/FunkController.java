@@ -23,8 +23,10 @@ public class FunkController {
         user.setCpr(cpr);
         //user.setPass(gen.genPassword()); // skal tildeles et tilfældigt genereret password, som overholder DTU's regler for kodeord.
         user.setRoles(roles);
-
         idao.createUser(user); // Sender UserDTO objektet videre ved kald af metode i dao'en, som så gemmer brugeren i databasen.
+
+        String sql = "INSERT INTO usersDB VALUES("+user.getUserId()+",'"+user.getUserName()+"','"+user.getIni()+"',"+user.getCpr()+",'"+user.getPass()+"','"+user.getRoles()+"')";
+
     }
 
     public void showUsers() throws IUserDAO.DALException

@@ -13,7 +13,7 @@ public class JDBC {
         return;
         }
 
-        public void createUser(int userID1,String userName1,String ini1,int cpr1,String password1,String role1) {
+        public void updateDB(String sql) {
             //loadDriver(); //Obsolete - only needed in rare cases.
             //try with resources (Java 7) - automatically calls connection.close() on end of try-catch block
             //Ensures that connections aren't left hanging
@@ -21,7 +21,6 @@ public class JDBC {
                     + "user="+username+"&"+"password="+password)){
                 Statement statement = connection.createStatement();
                 // Create sql statement for inserting new user into the database.
-                String sql = "INSERT INTO usersDB VALUES("+userID1+",'"+userName1+"','"+ini1+"',"+cpr1+",'"+password1+"','"+role1+"')";
                 statement.executeUpdate(sql);
                 showAllUsers();
                 return;
