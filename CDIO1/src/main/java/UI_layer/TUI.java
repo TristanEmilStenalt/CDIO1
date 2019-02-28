@@ -10,7 +10,7 @@ Hovedmenu:
 
 
 import Data_layer.dal.IUserDAO;
-import function_layer.FunkController;
+import Function_layer.FunkController;
 
 import java.util.Scanner;
 
