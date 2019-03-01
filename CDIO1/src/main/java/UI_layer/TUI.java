@@ -1,13 +1,4 @@
-package UI_layer;/*
-Brugergrænseflade implementering/use-cases.
-Hovedmenu:
-1. Opret ny bruger
-2. List Brugere
-3. Ret bruger
-4. Slet bruger
-6. Afslut program
- */
-
+package UI_layer;
 
 import Data_layer.dal.IUserDAO;
 import Data_layer.dto.UserDTO;
@@ -18,13 +9,14 @@ import java.util.Scanner;
 
 public class TUI {
 
-    //fields
+    // Initialization of scanner and controller
     Scanner scan = new Scanner(System.in);
     FunkController fCon = new FunkController();
 
 
     // Methods
 
+    // "Main menu" method. Takes user input and sends them in a direction.
     public void showMenu() throws IUserDAO.DALException {
         boolean menuActive = true;
 
@@ -64,6 +56,8 @@ public class TUI {
 
     // Use Case methods
 
+
+    // Scans user input and passes along to functionController which generates remaining user info and creates user.
     public void createUser() throws IUserDAO.DALException {
         System.out.println("--- Enter details below. User ID and Password will be assigned automatically. ---");
         System.out.println("Enter username: ");
@@ -75,22 +69,25 @@ public class TUI {
         System.out.println("Enter roles: ");
         String roles = scan.next();
 
-        pressToContinue();
 
-        fCon.createUser(userName, initials, cpr, roles); // Calls FunkController and passes along params
+        fCon.createUser(userName, initials, cpr, roles); // Calls function controller and passes along params
 
         System.out.println("[User Created Sucessfully]");
     }
 
+    // Gets userList from DAO through functionController and prints users.
     public void showUsers()throws IUserDAO.DALException
     {
-        List<UserDTO> userList = fCon.getUsers();
-        for (UserDTO user : userList) {
+        System.out.println("Getting users from database...");
+        List<UserDTO> userList = fCon.getUsers(); // Calls function controller which then calls DAO to get list with users (currently an ArrayList).
+
+        for (UserDTO user : userList) { // For-each user in userList print user, which uses UserDTO toString() method.
             System.out.println(user);
         }
-        pressToContinue();
+
     }
 
+    // Scans user input and passes along to functionController which sets new user info.
     public void updateUser() throws IUserDAO.DALException {
         System.out.println("Enter ID of user to update: ");
         int userID = scan.nextInt();
@@ -101,23 +98,18 @@ public class TUI {
         String ini = scan.next();
         System.out.println("Enter new role: ");
         String roles = scan.next();
-        fCon.updateUser(userID,userName,ini,roles);
+        fCon.updateUser(userID,userName,ini,roles); //
     }
 
+    // Scans user input for id of user to delete and passes it along to functionController
     public void deleteUser() throws IUserDAO.DALException
     {
         System.out.println("Select userID of the user you wish to delete: ");
-        int deleteUser = scan.nextInt();
-        fCon.deleteUser(deleteUser);
+        int id = scan.nextInt();
+        fCon.deleteUser(id);
     }
 
 
-    // Helping methods
-
-    public void pressToContinue()
-    {
-
-    }
 
 
 
