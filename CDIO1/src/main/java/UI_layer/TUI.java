@@ -29,8 +29,9 @@ public class TUI {
         boolean menuActive = true;
 
         do {
-            System.out.print("Press ENTER to continue...");
-            scan.next();
+            System.out.print("press ENTER to continue...");
+            scan.nextLine();
+            System.out.println("");
             System.out.println("--- Main Menu ---\n(1) Create User\n(2) Show Users\n(3) Update User\n(4) Delete User\n(5) Exit\n--- Main Menu ---");
             int menu = scan.nextInt();
 
