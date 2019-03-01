@@ -13,7 +13,7 @@ public interface IUserDAO {
 	void deleteUser(int userId) throws DALException;
 	int idCount() throws DALException;
 
-	//Brugerdefineret Exception klasse, som extender Exception.
+	//Userdefined Exception class, which extends Exception.
 	public class DALException extends Exception {
 
 		/**
