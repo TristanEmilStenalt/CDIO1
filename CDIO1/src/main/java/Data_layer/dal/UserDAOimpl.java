@@ -112,7 +112,7 @@ public class UserDAOimpl implements IUserDAO {
 
             count++;
             statement.executeUpdate("UPDATE userAmount SET count="+count);
-            // c.close();
+            //c.close();
 
         } catch (SQLException e) {
             e.printStackTrace();
@@ -128,6 +128,8 @@ public class UserDAOimpl implements IUserDAO {
             Statement statement = c.createStatement();
             statement.executeUpdate("UPDATE usersDB "+"SET userName='"+user.getUserName()+"' ,"+"ini='"+user.getIni()+"',"+"roles='"+user.getRoles()+"' WHERE userId="+user.getUserId());
 
+            //c.close();
+
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -142,6 +144,7 @@ public class UserDAOimpl implements IUserDAO {
             statement.executeUpdate("DELETE FROM usersDB WHERE userID="+userId);
             System.out.println("User has been deleted");
 
+            //c.close();
         } catch (SQLException e) {
 
             e.printStackTrace();
