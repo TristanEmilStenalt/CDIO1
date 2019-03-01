@@ -50,7 +50,7 @@ public class TUI {
 
         } while (menuActive == true);
 
-        scan.close();
+        scan.close(); // close scanner
     }
 
 
