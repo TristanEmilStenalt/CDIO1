@@ -50,11 +50,11 @@ public class DBTester {
 
 		printUsers(iDAO);
 
-//		try {
-//			iDAO.deleteUser(1);
-//		} catch (DALException e) {
-//			e.printStackTrace();
-//		}
+		try {
+			iDAO.deleteUser(1);
+		} catch (DALException e) {
+			e.printStackTrace();
+		}
 
 		printUsers(iDAO);
 
