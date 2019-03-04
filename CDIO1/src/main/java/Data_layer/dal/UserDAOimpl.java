@@ -12,6 +12,7 @@ public class UserDAOimpl implements IUserDAO {
     String host = "ec2-52-30-211-3.eu-west-1.compute.amazonaws.com";
     String username = "s153679";
     String password = "2IYMod6yoCtICi61cdPFR";
+    //String userTableName = "usersDBTest";
 
     // Creates connection to database
     private Connection createConnection() throws DALException {
@@ -22,6 +23,7 @@ public class UserDAOimpl implements IUserDAO {
             throw new DALException(e.getMessage());
         }
     }
+
 
 
     //Returns user from database based on id input.
@@ -43,7 +45,7 @@ public class UserDAOimpl implements IUserDAO {
             user.setPass(resultSet.getString(5));
 
             String rolesStr = resultSet.getString(6);
-            ArrayList<String> roles = new ArrayList<>(Arrays.asList(rolesStr.split(",")));
+            ArrayList<String> roles = new ArrayList<>(Arrays.asList(rolesStr.split(","))); //Splits the String into String elements at every "," in the String.
             user.setRoles(roles);
 
             c.close(); // close connection to db
@@ -55,6 +57,7 @@ public class UserDAOimpl implements IUserDAO {
             throw new DALException(e.getMessage());
         }
     }
+
 
 
     // Puts all users from the database in a list and returns the list
@@ -70,8 +73,6 @@ public class UserDAOimpl implements IUserDAO {
             System.out.println("Got resultset from database:");
 
             while (resultSet.next()){
-                // This while loop gets the userid from every user in the database
-                // It then sends the user id to the getUser, so that we store it in the UserDTO
                 userList.add(getUser(resultSet.getInt(1)));
             }
 
@@ -84,6 +85,7 @@ public class UserDAOimpl implements IUserDAO {
     }
 
 
+
     // Creates new user in database with user sent from controller
     @Override
     public void createUser(UserDTO user) throws DALException {
@@ -91,11 +93,8 @@ public class UserDAOimpl implements IUserDAO {
         {
             Statement statement = c.createStatement();
 
-            String roles = user.getRoles().toString(); //endte med at gå med dette.
-//            for (String role: user.getRoles())
-//            {
-//                roles += role+",";
-//            }
+            // Puts all String Elements into a single String with "," as seperator.
+            String roles = user.getRoles().toString(); // Ended up going with this way of doing it. toString method for ArrayList with Strings. Could have done something with loops etc.
 
 
             // Create sql statement for inserting new user into the database.
@@ -108,6 +107,8 @@ public class UserDAOimpl implements IUserDAO {
             e.printStackTrace();
             }
         }
+
+
 
         //Gets id counter value from database and ++ and returns it
     @Override
@@ -132,6 +133,9 @@ public class UserDAOimpl implements IUserDAO {
         return count;
         }
 
+
+
+
         // Updates user in database with new userinfo sent from controller
     @Override
     public void updateUser(UserDTO user) throws DALException {
@@ -146,6 +150,9 @@ public class UserDAOimpl implements IUserDAO {
             e.printStackTrace();
         }
     }
+
+
+
 
     // Deletes user in database based on id gotten from controller
     @Override
@@ -162,5 +169,9 @@ public class UserDAOimpl implements IUserDAO {
             e.printStackTrace();
         }
     }
+
+
+
+
 
 }
