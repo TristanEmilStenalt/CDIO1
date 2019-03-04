@@ -3,14 +3,15 @@ package Data_layer.dal;
 import Data_layer.dto.UserDTO;
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class UserDAOimpl implements IUserDAO {
 
     // Local variables to make switch of database easier for the mind.
     String host = "ec2-52-30-211-3.eu-west-1.compute.amazonaws.com";
-    String username = "s173839";
-    String password = "uOkOJknRbHNXZMTPuBV9q";
+    String username = "s153679";
+    String password = "2IYMod6yoCtICi61cdPFR";
 
     // Creates connection to database
     private Connection createConnection() throws DALException {
@@ -40,7 +41,10 @@ public class UserDAOimpl implements IUserDAO {
             user.setIni(resultSet.getString(3));
             user.setCpr(resultSet.getInt(4));
             user.setPass(resultSet.getString(5));
-            user.setRoles(resultSet.getString(6));
+
+            String rolesStr = resultSet.getString(6);
+            ArrayList<String> roles = new ArrayList<>(Arrays.asList(rolesStr.split(",")));
+            user.setRoles(roles);
 
             c.close(); // close connection to db
 
@@ -86,8 +90,16 @@ public class UserDAOimpl implements IUserDAO {
         try (Connection c = createConnection())
         {
             Statement statement = c.createStatement();
+
+            String roles = user.getRoles().toString(); //endte med at gå med dette.
+//            for (String role: user.getRoles())
+//            {
+//                roles += role+",";
+//            }
+
+
             // Create sql statement for inserting new user into the database.
-            statement.executeUpdate("INSERT INTO usersDB VALUES("+user.getUserId()+",'"+user.getUserName()+"','"+user.getIni()+"',"+user.getCpr()+",'"+user.getPass()+"','"+user.getRoles()+"')");
+            statement.executeUpdate("INSERT INTO usersDB VALUES("+user.getUserId()+",'"+user.getUserName()+"','"+user.getIni()+"',"+user.getCpr()+",'"+user.getPass()+"','"+roles+"')");
 
             //c.close();
         }

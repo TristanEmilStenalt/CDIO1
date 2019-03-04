@@ -15,7 +15,7 @@ public class FunkController {
     // Methods
 
     // Creates and sets user values based on params from TUI and helping function class
-    public void createUser(String userName, String initials, int cpr, String roles) throws IUserDAO.DALException
+    public void createUser(String userName, String initials, int cpr, List<String> roles) throws IUserDAO.DALException
     {
         UserDTO user = new UserDTO(); // Creates new UserDTO
 
@@ -36,7 +36,7 @@ public class FunkController {
     }
 
     // Gets user from DAO. Updates it with values from TUI and sends it to DAO again.
-    public void updateUser(int id,String userName,String ini,String roles) throws IUserDAO.DALException
+    public void updateUser(int id,String userName,String ini,List<String> roles) throws IUserDAO.DALException
     {
         UserDTO user= idao.getUser(id);
         user.setUserName(userName);

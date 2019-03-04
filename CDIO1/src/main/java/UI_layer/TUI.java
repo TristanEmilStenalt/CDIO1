@@ -4,6 +4,7 @@ import Data_layer.dal.IUserDAO;
 import Data_layer.dto.UserDTO;
 import Function_layer.FunkController;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
@@ -67,7 +68,11 @@ public class TUI {
         System.out.println("Enter cpr: ");
         int cpr = scan.nextInt();
         System.out.println("Enter roles: ");
-        String roles = scan.next();
+        List<String> roles = new ArrayList<>();
+        for (int i = 0; i < 4 ; i++) {
+            roles.add(scan.next());
+        }
+        //String roles = scan.next();
 
 
         fCon.createUser(userName, initials, cpr, roles); // Calls function controller and passes along params
@@ -97,7 +102,11 @@ public class TUI {
         System.out.println("Enter new initials: ");
         String ini = scan.next();
         System.out.println("Enter new role: ");
-        String roles = scan.next();
+        List<String> roles = new ArrayList<>();
+        for (int i = 0; i < 4 ; i++) {
+            roles.add(scan.next());
+        }
+        //String roles = scan.next();
         fCon.updateUser(userID,userName,ini,roles); //
     }
 

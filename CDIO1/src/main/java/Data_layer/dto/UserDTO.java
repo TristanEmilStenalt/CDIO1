@@ -12,9 +12,10 @@ public class UserDTO implements Serializable{
 	private String ini;
 	private int cpr;
 	private String pass;
-	private String roles;
+	private List<String> roles;
 
 	public UserDTO() {
+		this.roles = new ArrayList<>();
 	}
 
 	public int getUserId() {
@@ -40,34 +41,35 @@ public class UserDTO implements Serializable{
 	public String getPass() { return pass; }
 	public void setPass(String pass) { this.pass = pass; }
 
-	public String getRoles() {
+//	public String getRoles() {
+//		return roles;
+//	}
+//
+//	public void setRoles(String roles) {
+//		this.roles = roles;
+//	}
+
+	//Methods for multiple roles in a list. To be implemented when we can save a List in the database with serialization.
+	public List<String> getRoles() {
 		return roles;
 	}
-
-	public void setRoles(String roles) {
+	public void setRoles(List<String> roles) {
 		this.roles = roles;
 	}
 
-	//Methods for multiple roles in a list. To be implemented when we can save a List in the database with serialization.
-//	public List<String> getRoles() {
-//		return roles;
-//	}
-//	public void setRoles(List<String> roles) {
-//		this.roles = roles;
-//	}
-//
-//	public void addRole(String role){
-//		this.roles.add(role);
-//	}
+	public void addRole(String role){
+		this.roles.add(role);
+	}
 
 	/**
 	 * 
 	 * @param //role
 	 * @return true if role existed, false if not
 	 */
-//	public boolean removeRole(String role){
-//		return this.roles.remove(role);
-//	}
+	public boolean removeRole(String role){
+		return this.roles.remove(role);
+	}
+
 
 	@Override
 	public String toString() {
@@ -80,4 +82,5 @@ public class UserDTO implements Serializable{
 				", roles=" + roles +
 				'}';
 	}
+
 }
