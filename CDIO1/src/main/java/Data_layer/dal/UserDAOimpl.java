@@ -5,7 +5,8 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class UserDAOimpl implements IUserDAO {
+public class
+UserDAOimpl implements IUserDAO {
 
     // Local variables to make switch of database easier for the mind.
     String host = "ec2-52-30-211-3.eu-west-1.compute.amazonaws.com";
